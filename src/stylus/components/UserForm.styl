@@ -1,0 +1,54 @@
+/*User Form Styles*/
+
+.user-form-container
+  align-items: center
+  display: flex
+  height: 100%
+  justify-content: center
+
+  .user-form
+    display: grid
+    max-width: 85vw
+
+    &--input-container
+      display: flex
+      flex-direction: column
+      color: $blue
+
+      label
+        cursor: pointer
+
+      .text-input
+        border: 1px solid $blue
+        border-radius: $border-radius
+        font-size: 1.4rem
+        margin: $trailing-margin 0
+        max-width: 420px
+        outline: none
+        padding: 12px
+        width: 25vw
+
+    &--file-input-container
+      align-items: center
+      display: flex
+      justify-content: space-between
+      margin: $trailing-margin 0
+
+      .user-form--profile-image-preview
+        height: 130px
+        width: 130px
+        border-radius: 50%
+        border: 2px solid lighten($blue, 20%)
+
+      .file-input
+        display: none
+
+      label.file-input-label
+        button('outline')
+        display: inline-block
+        font-size: 1.2rem
+        margin: $trailing-margin 0
+
+    &--button
+      button('solid')
+

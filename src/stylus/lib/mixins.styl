@@ -1,0 +1,32 @@
+/*mixins*/
+
+two-color-gradient-bg($color1, $color2)
+  background: -webkit-linear-gradient(90deg, $color1 25%, $color2 100%)
+  background: -moz-linear-gradient(90deg, $color1 25%, $color2 100%)
+  background: -ms-linear-gradient(90deg, $color1 25%, $color2 100%)
+  background: -o-linear-gradient(90deg, $color1 25%, $color2 100%)
+  background: linear-gradient(90deg, $color1 25%, $color2 100%)
+
+button($type)
+  border-radius: $border-radius
+  border: 1px solid $blue
+  cursor: pointer
+  font-size: 1.4rem
+  margin: $trailing-margin 0
+  padding: 12px
+  outline: none
+  transition: 0.2s
+
+  if $type is 'solid'
+    background-color: $blue
+    color: $darken-white
+  else
+    background-color: $darken-white
+    color: $blue
+
+    &:hover
+      color: $darken-white
+      background-color: $blue
+
+  &:active
+    transform: scale(0.99)
