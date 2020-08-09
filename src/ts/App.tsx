@@ -35,7 +35,23 @@ function App(): JSX.Element {
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>): void => {
     setSavingImage(true)
-    console.log(event)
+    const errors: string[] = []
+    const file: File = Object.values(event.target.files)[0]
+    const allowedTypes: string[] = ['image/jpeg', 'image/png', 'image/jpg']
+
+    if (file.size > 1000000) {
+      errors.push('this file is too big. Max size is 1MB.')
+    }
+
+    if (allowedTypes.every(type => file.type !== type)) {
+      errors.push('this file type is not supported. Supported types: png, jpg, jpeg.')
+    }
+
+    if (errors.length) {
+      return errors.forEach((item) => alert(item))
+    }
+
+    console.log(file)
   }
 
   const handleSubmit = (event: SyntheticEvent): void => {
