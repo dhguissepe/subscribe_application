@@ -9,14 +9,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    publicPath: 'http://localhost:9000/'
+    publicPath: 'http://34.121.32.137:80/'
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
+    host: '0.0.0.0',
     open: true,
-    port: 9000,
+    port: 80,
     hot: true,
-    historyApiFallback: true
   },
   module: {
     rules: [

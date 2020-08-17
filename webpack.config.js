@@ -4,6 +4,7 @@ const TerserJSPlugin = require('terser-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = {
   entry: {
@@ -11,14 +12,16 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new TerserJSPlugin(),
+      new TerserJSPlugin({
+        extractComments: false
+      }),
       new OptimizeCssAssetsPlugin()
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, '..', 'hello_world_django_react', 'build'),
     filename: 'js/[name].[hash].js',
-    publicPath: '/'
+    publicPath: '/build/',
   },
   module: {
     rules: [
@@ -62,15 +65,14 @@ module.exports = {
     extensions: [ '.tsx', '.ts', '.js', '.jsx' ]
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'public', 'index.html'),
-      favicon: path.resolve(__dirname, 'public', 'favicon.ico')
-    }),
     new MiniCSSExtractPlugin({
-      filename: 'css/[name].[hash].css'
+      filename: 'css/[name].[hash].css',
     }),
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/app.**']
+      cleanOnceBeforeBuildPatterns: ['**/app.**', 'webpack-stats**.**'],
+    }),
+    new BundleTracker({
+      filename: '../hello_world_django_react/build/webpack-stats.json',
     })
   ]
 }
