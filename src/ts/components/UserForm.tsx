@@ -3,16 +3,14 @@ import React, { ChangeEvent, SyntheticEvent } from 'react'
 //props types
 interface UserFormProps {
   error: Error
-  profileImageSrc: string
   onChange(event: ChangeEvent): void
   onSubmit(event: SyntheticEvent): void
-  onImageUpload(event: ChangeEvent): void
 }
 
 function UserForm(props: UserFormProps): JSX.Element {
   return (
-    <section className="user-form-container" onSubmit={ props.onSubmit }>
-      <form className="user-form">
+    <section className="user-form-container">
+      <form className="user-form" onSubmit={ props.onSubmit }>
         <div className="user-form--input-container">
           <label htmlFor="username">Username</label>
           <input
@@ -25,12 +23,12 @@ function UserForm(props: UserFormProps): JSX.Element {
           />
         </div>
         <div className="user-form--input-container">
-          <label htmlFor="name">First Name</label>
+          <label htmlFor="first_name">First Name</label>
           <input
             className="text-input"
             type="text"
-            name="name"
-            id="name"
+            name="first_name"
+            id="first_name"
             onChange={ props.onChange }
             required
           />
@@ -72,9 +70,9 @@ function UserForm(props: UserFormProps): JSX.Element {
           <label htmlFor="confirm-password">Confirm password</label>
           <input
             className="text-input"
-            type="text"
-            name="confirm-password"
-            id="confirm-password"
+            type="password"
+            name="password_confirmation"
+            id="password_confirmation"
             onChange={ props.onChange }
             required
           />

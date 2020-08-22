@@ -3,4 +3,10 @@ import ReactDOM from 'react-dom'
 import App from './src/ts/App'
 import './src/stylus/index.styl'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+declare global {
+    interface Window { render_app: CallableFunction, CSRF: string }
+}
+
+window.render_app = () => {
+    ReactDOM.render(<App />, document.getElementById('root'))
+}

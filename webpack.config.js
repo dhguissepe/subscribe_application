@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const path = require('path')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const BundleTracker = require('webpack-bundle-tracker')
 
