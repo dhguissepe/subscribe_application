@@ -24,8 +24,8 @@ function App(): JSX.Element {
   // const [profileImageSrc, setProfileImageSrc] = useState<string>('https://i.ibb.co/Vx50RCv/male-placeholder-image.jpg')
 
   useEffect(() => {
-    const CSRFMiddlewareTokenNode = document.querySelector('[name="csrfmiddlewaretoken"]')
-    
+    const CSRFMiddlewareTokenNode: HTMLInputElement = document.querySelector('[name="csrfmiddlewaretoken"]')
+
     setCSRF(CSRFMiddlewareTokenNode ? CSRFMiddlewareTokenNode.value : '')
   }, [])
 
