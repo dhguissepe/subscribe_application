@@ -24,9 +24,9 @@ function App(): JSX.Element {
   // const [profileImageSrc, setProfileImageSrc] = useState<string>('https://i.ibb.co/Vx50RCv/male-placeholder-image.jpg')
 
   useEffect(() => {
-    setCSRF(window.CSRF)
-
-    delete window.CSRF
+    const CSRFMiddlewareTokenNode = document.querySelector('[name="csrfmiddlewaretoken"]')
+    
+    setCSRF(CSRFMiddlewareTokenNode ? CSRFMiddlewareTokenNode.value : '')
   }, [])
 
   const [formData, setFormData] = useState<subscribeFormData>({
@@ -67,6 +67,10 @@ function App(): JSX.Element {
   // }
 
   const encodeFormData = (data: subscribeFormData) => {
+    if (!CSRF) {
+        throw new Error('CSRF token not present')
+    }
+
     let stringifiedData = `csrfmiddlewaretoken=${CSRF}`
 
     Object.keys(data).forEach((item) => {
