@@ -20,13 +20,13 @@ function App(): JSX.Element {
   // const [savingImage, setSavingImage] = useState<boolean>(false)
   const [suscribed, setSuscribed] = useState<boolean>(false)
   const [error, setError] = useState<Error | undefined>(undefined)
-  const [CSRF, setCSRF] = useState<string>('')
+  const [CSRFToken, setCSRFToken] = useState<string>('')
   // const [profileImageSrc, setProfileImageSrc] = useState<string>('https://i.ibb.co/Vx50RCv/male-placeholder-image.jpg')
 
   useEffect(() => {
     const CSRFMiddlewareTokenNode: HTMLInputElement = document.querySelector('[name="csrfmiddlewaretoken"]')
 
-    setCSRF(CSRFMiddlewareTokenNode ? CSRFMiddlewareTokenNode.value : '')
+    setCSRFToken(CSRFMiddlewareTokenNode ? CSRFMiddlewareTokenNode.value : '')
   }, [])
 
   const [formData, setFormData] = useState<subscribeFormData>({
@@ -67,17 +67,17 @@ function App(): JSX.Element {
   // }
 
   const encodeFormData = (data: subscribeFormData) => {
-    if (!CSRF) {
+    if (!CSRFToken) {
         throw new Error('CSRF token not present')
     }
 
-    let stringifiedData = `csrfmiddlewaretoken=${CSRF}`
+    let stringifiedData = `csrfmiddlewaretoken=${CSRFToken}`
 
     Object.keys(data).forEach((item) => {
       stringifiedData += `&${item}=${data[item]}`
     })
 
-    return encodeURIComponent(stringifiedData)
+    return encodeURI(stringifiedData)
   }
 
   const handleSubmit = async (event: SyntheticEvent) => {
@@ -90,7 +90,8 @@ function App(): JSX.Element {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/x-www-form-urlencoded'
+          'Accept': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': CSRFToken
         },
         body: encodeFormData(formData)
       })
